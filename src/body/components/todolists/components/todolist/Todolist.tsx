@@ -29,7 +29,7 @@ export const Todolist = ({title, tasks, setFilterState, filterState, setTasks}: 
             //скопировали
             const newArrTasks = [...tasks]
             //добавили таску
-            newArrTasks.push({id: uuidv4(), task: value, isDone: false})
+            newArrTasks.unshift({id: uuidv4(), task: value, isDone: false})
             // установили useState
             setTasks(newArrTasks)
             setValue("")
@@ -55,6 +55,14 @@ export const Todolist = ({title, tasks, setFilterState, filterState, setTasks}: 
         }
         console.log(event)
     }
+    const onDeleteTask = (id:string) => {
+        const newArr = [...tasks]
+    const filteredTasks = newArr.filter(task => task.id !== id)
+        console.log(newArr)
+        console.log(id)
+        console.log(filteredTasks)
+        setTasks(filteredTasks)
+    }
     return <>
         <div>{title}</div>
         <div>
@@ -67,10 +75,13 @@ export const Todolist = ({title, tasks, setFilterState, filterState, setTasks}: 
             <button onClick={addTask}>Add task</button>
         </div>
         <ul>
-            {tasks.map((task) => (
+            {tasks.map((task) => console.log(task.id) || (
                 <li key={task.id}>
                     <input type={"checkbox"} checked={task.isDone}/>{task.task}
+                    <button>Изменить</button>
+                    <button onClick={()=>onDeleteTask(task.id)}>Удалить</button>
                 </li>
+
             ))}
         </ul>
         <div>
