@@ -2,3 +2,23 @@
 .error {
     border: 5px solid black;
 }
+.tasks {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+
+}
+.isDone{
+    position: relative;
+    display: inline-block;
+}
+
+.isDone:after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    left: 0;
+    top: 50%;
+}
